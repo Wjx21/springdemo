@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.RecordDao">
+	<resultMap type="com.baizhi.entity.Record" id="recordMap">
+		<id property="id" column="id"/>
+		<result property="uid" column="user_id"/>
+		<result property="aid" column="auction_id"/>
+		<result property="time" column="auction_time"/>
+		<result property="price" column="auction_price"/>
+		<association property="user" javaType="com.baizhi.entity.User">
+			<id property="id" column="userid"/>
+			<result property="name" column="user_name"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="recordMap">
+	select x.*,y.user_id userid,y.user_name from
+	(select * from auction_record where auction_id=#{aid} order by auction_price desc) x left join auction_user y
+	on x.user_id=y.user_id
+	where rownum between 1 and 4
+	</select>
+	<insert id="insert">
+		insert into auction_record values(seq_record.nextval,#{uid},#{aid},sysdate,#{price})
+	</insert>
+	<select id="selectByUid" resultMap="recordMap">
+		select * from auction_record where user_id=#{uid} and auction_id=#{aid}
+	</select>
+	<update id="update">
+		update auction_record set auction_time=sysdate,auction_price=#{price}
+	</update>
+	<delete id="delete">
+		delete auction_record where auction_id=#{id}
+	</delete>
+	<select id="selectByAid" resultType="com.baizhi.entity.RecordDTO">
+		select x.auction_time time,x.auction_price price,y.user_name name from
+		(select * from auction_record where auction_id=#{aid} order by auction_price desc) x left join auction_user y
+		on x.user_id=y.user_id
+		where rownum between 1 and 4
+	</select>
+	
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.AuctionDao">
+	<resultMap type="com.baizhi.entity.Auction" id="auctionMap">
+		<id property="id" column="auction_id"/>
+		<result property="name" column="auction_name"/>
+		<result property="startPrice" column="auction_start_price"/>
+		<result property="upset" column="auction_upset"/>
+		<result property="startTime" column="auction_start_time"/>
+		<result property="endTime" column="auction_end_time"/>
+		<result property="pic" column="auction_pic"/>
+		<result property="desc" column="auction_desc"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="auctionMap">
+		select * from auction
+		<where>
+			 <if test="name!=null">
+			auction_name like #{name}
+			</if>
+			<if test="desc!=null">
+			and auction_desc like #{desc}
+			</if>
+			<if test="startTime!=null and startTime!=''">
+			and auction_start_time = to_date(#{startTime},'yyyy-mm-dd hh24:mi:ss')
+			</if>
+			<if test="endTime!=null and endTime!=''">
+			and auction_end_time = to_date(#{endTime},'yyyy-mm-dd hh24:mi:ss')
+			</if>
+			<if test="startPrice!=null and startPrice!=''">
+			and auction_start_price = #{startPrice}
+			</if>
+			
+		</where>
+	</select>
+	<select id="selectOne" resultMap="auctionMap">
+		select * from auction where auction_id=#{id}
+	</select>
+	<insert id="insert">
+		insert into auction values(seq_auction.nextval,#{name},#{startPirce},#{upset},#{startTime},#{endTime},#{pic},#{desc})
+	</insert>
+	<delete id="delete">
+		delete from auction where auction_id=#{id}
+	</delete>
+	<update id="update">
+		update auction set auction_name=#{name},auction_start_Price=#{startPirce},auction_upset=#{upset},auction_start_time=#{startTime},auction_end_time=#{endTime},auction_pic=#{pic},auction_desc=#{desc} where auction_id=#{id}
+	</update>
+	
+</mapper>

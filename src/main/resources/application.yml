@@ -1,0 +1,35 @@
+server:
+  port: 8088
+  context-path: /spring
+  jsp-servlet:
+    init-parameters:
+      development: true
+
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: hr
+    password: hr
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  profiles:
+    active: pro
+
+
+mybatis:
+  type-aliases-package: com.baizhi.entity
+  mapper-locations: com/baizhi/dao/*Mapper.xml
