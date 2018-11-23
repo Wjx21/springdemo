@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 自动生成1111111111111 -->
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.baizhi</groupId>
@@ -16,12 +17,19 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+    <!-- 自动生成1111111111111END -->
+
+    <!-- springboot父级依赖 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.8.RELEASE</version>
     </parent>
+    <!-- springboot父级依赖END -->
+
     <dependencies>
+
+        <!-- springboot相关jar包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -32,6 +40,8 @@
             <!-- 只在test测试里面运行 -->
             <scope>test</scope>
         </dependency>
+        <!-- springboot相关jar包END -->
+
         <!--数据库连接所需要的jar-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -65,6 +75,7 @@
         </dependency>
 
         <!-- 本地jar包 -->
+        <!-- 分页jar-->
         <dependency>
             <groupId>com.github.jsqlparser</groupId>
             <artifactId>jsqlparser</artifactId>
@@ -75,11 +86,15 @@
             <artifactId>pagehelper</artifactId>
             <version>5.1.2</version>
         </dependency>
+
+        <!-- Oracle数据库相关 -->
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0.4.0</version>
         </dependency>
+
+        <!-- google验证码 -->
         <dependency>
             <groupId>com.google.code.kaptcha</groupId>
             <artifactId>kaptcha</artifactId>
@@ -90,8 +105,9 @@
             <artifactId>kaptcha-jdk14</artifactId>
             <version>2.3.2</version>
         </dependency>
+        <!-- 本地jar包END -->
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+        <!-- AOP相关jar包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
